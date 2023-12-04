@@ -5,6 +5,8 @@ import {
   View,
   FlatList,
   ListRenderItemInfo,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { CoffeeHeader } from "./components/CoffeeHeader/CoffeeHeader";
 import { CoffeeItem } from "./components/CoffeeItem";
@@ -16,15 +18,13 @@ export default function App() {
     return <CoffeeItem {...item} />;
   }
   return (
-    <View style={styles.container}>
-      <FlatList
-        ListHeaderComponent={CoffeeHeader}
-        ItemSeparatorComponent={SeparatorItem}
-        data={coffeeList}
-        keyExtractor={(item) => item.name}
-        renderItem={renderItem}
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+          <FlatList 
+            keyExtractor={item => item.name}
+            data={coffeeList}
+            renderItem={({item}) => <CoffeeItem {...item}/>}
+          />
+    </SafeAreaView>
   );
 }
 
