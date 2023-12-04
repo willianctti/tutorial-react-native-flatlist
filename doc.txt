@@ -1,0 +1,54 @@
+para fazer com um map usamos a seguinte estrutura:
+
+export default function App() {
+  function renderItem({ item }: ListRenderItemInfo<Coffee>) {
+    return <CoffeeItem {...item} />;
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+
+      {coffeeList.map(coffee => <CoffeeItem {...coffee}/>)}
+    </SafeAreaView>
+  );
+}
+
+
+mas precisamos passar uma key:
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {coffeeList.map(coffee => (
+      <CoffeeItem key={coffee.name} {...coffee}/>
+      ))}
+    </SafeAreaView>
+
+
+e para conseguirmos fazer o scroll:
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+      {coffeeList.map(coffee => (
+      <CoffeeItem key={coffee.name} {...coffee}/>
+      ))}
+      </ScrollView>
+    </SafeAreaView>
+  );
+
+
+
+
+
+
+
+
+
+e com uma flatlist?
+ return (
+    <SafeAreaView style={styles.container}>
+          <FlatList 
+            keyExtractor={item => item.name}
+            data={coffeeList}
+            renderItem={({item}) => <CoffeeItem {...item}/>}
+          />
+    </SafeAreaView>
+  );
